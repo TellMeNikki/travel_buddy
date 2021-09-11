@@ -40,7 +40,7 @@ def delete_travel(request,id_dest):
   destination=Travel.objects.get(id=id_dest)
   destination.delete()
   messages.error(request, "THe trip was deleted!")
-  return redirect('/')
+  return redirect('/travels')
 
 @login_required
 def addtrip(request):
@@ -64,6 +64,7 @@ def addtrip(request):
     s_travel=request.POST['s_travel']
     e_travel=request.POST['e_travel']
     user = int(request.session['user']['id'])
+    userd = User.objects.get(id=user)
 
   trip =  Travel.objects.create(
       destination=destination,
@@ -73,7 +74,7 @@ def addtrip(request):
       creator_id = user
     )
 
-  user.travels.add(trip)
+  userd.travels.add(trip)
   messages.success(request, 'Trip created successfully!')
   return redirect( '/travels')
 
