@@ -1,0 +1,52 @@
+html, body {
+  height: 100%;
+}
+body{
+  background-image: url('../img/bg3.jpg');
+  background-position: unset;
+  background-size:cover;
+  background-repeat: no-repeat;
+  }
+.container{
+  margin: 0 auto;  
+  margin-top: 10%;
+  width: 50%;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  
+}
+
+#formulario{
+  margin: 0.5rem;
+  padding-top: 1.5rem;
+}
+
+.btn_trip{
+  width: 100%;
+  background-color: rgb(6, 61, 26);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-control{
+  margin-bottom: 0.8rem;
+  border-radius: 1rem;
+}
+
+label{
+  padding-left: 0.5rem;
+}
+
+#cont_index{
+  margin: 0 auto;  
+  width: 85%;
+  margin-top: 10%;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#tabla{
+  margin: 0.5rem;
+  padding-top: 1.5rem;
+  
+}

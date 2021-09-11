@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+<title>{% block title %} Travels {% endblock %}</title>
+{% block estilo %}
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+{% endblock %}
+{% block btn %}href="/addtrip">Add Trip {% endblock %}
+
+{% block content%}
+<div class="container-fluid mt-3"  id="cont_index">
+  <!-- Tabla-->
+  <h5 class="fw-bold mt-2">Your Trip Schedule</h5>
+  <div class="table-responsive" id="tabla">
+    <table class="table table-striped text-dark py-2 px-2 text-justify">
+      <thead>
+        <tr class="fw-bolder">
+          <th scope="col">Destination</th>
+          <th scope="col">Travel Start Date</th>
+          <th scope="col">Travel End Date</th>
+          <th scope="col">Plan</th>
+          <th scope="col">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for travel in travels %}
+        <tr>
+          <th scope="row">
+            <a href="/travels/destination/{{travel.id}}" class="text-decoration-none">{{travel.destination}}</a>
+          </th>
+          <td>{{travel.start_travel}}</td>
+          <td>{{travel.end_travel}}</td>
+          <td>{{travel.description}}</td>
+          <td>
+            <form method="POST" action="eliminar/{{postre.id}}">
+              {% csrf_token %}
+              <div class="btn-group">
+                <a type="button" data-href="/" data-bs-toggle="modal" class="btn-default border bg-danger text-light"
+                  id="delete" data-bs-target="#delete_btn"><i class="fas fa-trash 9x"></i> Cancel</a>
+                <a type="button" data-href="/" data-bs-toggle="modal"
+                  class="btn-default border bg-danger text-light" id="delete" data-bs-target="#delete_btn"><i
+                    class="fas fa-trash 9x"></i> Delete</a>
+              </div>
+            </form>
+          </td>
+        </tr>
+          {% empty %}
+          <th scope="row">You have no travels yet</th>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container-fluid mt-3" id="cont_index">
+  <!-- Tabla-->
+  <h5 class="fw-bold mt-2">Other User's plans</h5>
+  <div class="table-responsive" id="tabla">
+    <table class="table table-striped text-dark py-2 px-2 text-justify">
+      <thead>
+        <tr class="fw-bolder">
+          <th scope="col">Name</th>
+          <th scope="col">Travel Start Date</th>
+          <th scope="col">Travel End Date</th>
+          <th scope="col">Do you wanna Join??</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for travel in other_travels %}
+        <tr>
+          <th scope="row">
+            <a href="/travels/destination/{{travel.id}}" class="text-decoration-none">{{travel.destination}}</a>
+          </th>
+          <td>{{travel.start_travel}}</td>
+          <td>{{travel.end_travel}}</td>
+          <td>
+            <form method="POST" action="eliminar/{{postre.id}}">
+              {% csrf_token %}
+              <div class="btn-group">
+                <a type="button" data-href="/" data-bs-toggle="modal" class="btn-default border bg-danger text-light"
+                  id="delete" data-bs-target="#delete_btn"> Join</a>
+              </div>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <th scope="row">You have no travels yet</th>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+{% endblock%}

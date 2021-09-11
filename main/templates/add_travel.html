@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block titulo %}Add Trip{% endblock %}
+{% block estilo %}
+
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row mx-1 my-1" id="formulario">
+      <h3 class="text-center my-2 fw-bold ">Add a Trip</h3>
+      <form action="/addtrip" method="POST">
+        {% csrf_token %}
+        <label for="destination"> Destination</label>
+        <input type="text" class="form-control" name="destination" id="destination" required>
+        <label for="description"> Description</label>
+        <input type="text" class="form-control" name="description" id="description" required>
+        <div class="row mb-2">
+          <div class="col-6">
+            <label for="s_travel"> Depart</label>
+          <input type="date" class="form-control" name="s_travel" id="s_travel" required>
+        </div>
+          <div class="col-6">
+            <label for="e_travel"> Return</label>
+            <input type="date" class="form-control" name="e_travel" id="e_travel" required>
+          </div>
+        </div>
+        <input type="submit" value="Add Trip" class="btn btn_trip text-center  fw-bold text-light">
+      </form>
+    </div>
+  </div>
+  {% endblock %}
+{% block js %}
+{% endblock %}
