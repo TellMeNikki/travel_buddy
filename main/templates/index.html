@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for travel in travels %}
+        {% for travel in travels.all%}
         <tr>
           <th scope="row">
             <a href="view/{{travel.id}}" class="text-decoration-none text-dark"><i class="fas fa-map-marker-alt"></i> {{travel.destination}}</a>
@@ -37,6 +37,7 @@
             <form method="POST" action="eliminar/{{postre.id}}">
               {% csrf_token %}
               <div class="btn-group">
+
                 <a type="button" href="cancel/{{travel.id}}" class="btn border bg-warning text-light"id="cancel_btn" name="cancel_btn"><i class="fas fa-user-minus 2x"></i> Cancel</a>
                 <a type="button" href="delete/{{travel.id}}" class="btn border bg-danger text-light ms-2" id="delete_btn" name="delete_btn"><i class="fas fa-trash"></i> Delete</a>
               </div>

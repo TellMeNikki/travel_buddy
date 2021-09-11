@@ -20,6 +20,29 @@ def index(request):
   return render(request, "index.html", context)
 
 @login_required
+def join_travel(request,id_dest):
+  destination=Travel.objects.get(id=id_dest)
+  add_user= User.objects.get(id=request.session['user']['id'])
+  join_travel=destination.users.add(add_user)
+  messages.success(request, "Now you're part of the trip!!")
+  return redirect('/travels')
+
+@login_required
+def cancel_travel(request,id_dest):
+  destination=Travel.objects.get(id=id_dest)
+  off_user= User.objects.get(id=request.session['user']['id'])
+  cancel_travel=destination.users.remove(off_user)
+  messages.warning(request, "you got off the trip!")
+  return redirect('/travels')
+
+
+def delete_travel(request,id_dest):
+  destination=Travel.objects.get(id=id_dest)
+  destination.delete()
+  messages.error(request, "THe trip was deleted!")
+  return redirect('/')
+
+@login_required
 def addtrip(request):
   if request.method=='GET':
     travels = Travel.objects.all()
@@ -42,15 +65,17 @@ def addtrip(request):
     e_travel=request.POST['e_travel']
     user = int(request.session['user']['id'])
 
-    Travel.objects.create(
+  trip =  Travel.objects.create(
       destination=destination,
       description=description,
       start_travel=s_travel,
       end_travel=e_travel,
       creator_id = user
     )
-    messages.success(request, 'Trip created successfully!')
-    return redirect( '/travels')
+
+  user.travels.add(trip)
+  messages.success(request, 'Trip created successfully!')
+  return redirect( '/travels')
 
 @login_required
 def view(request,id_dest):
@@ -64,24 +89,3 @@ def view(request,id_dest):
   }
   return render(request, "view.html", context)
 
-@login_required
-def join_travel(request,id_dest):
-  destination=Travel.objects.get(id=id_dest)
-  add_user= User.objects.get(id=request.session['user']['id'])
-  join_travel=destination.users.add(add_user)
-  messages.success(request, "Now you're part of the trip!!")
-  return redirect('/travels')
-
-@login_required
-def cancel_travel(request,id_dest):
-  destination=Travel.objects.get(id=id_dest)
-  off_user= User.objects.get(id=request.session['user']['id'])
-  cancel_travel=destination.users.remove(off_user)
-  messages.warning(request, "you got off the trip!")
-  return redirect('/travels')
-
-def delete_travel(request,id_dest):
-  destination=Travel.objects.get(id=id_dest)
-  destination.delete()
-  messages.error(request, "THe trip was deleted!")
-  return redirect('/')
