@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+<title>{% block title %} Travels {% endblock %}</title>
+{% block estilo %}
+
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+{% endblock %}
+
+{% block content%}
+  <div class="container" id="block_view">
+    <div class="row mx-1 my-1" id="view_trip">
+      <h3 class="text-justify my-2 fw-bold text-capitalize"><i class="fas fa-map-marked-alt"></i> {{destination.destination}}</h3>
+      <div class="fs-5"> planned by <span class="text-capitalize fw-bold" name="creator" id="creator">{{destination.creator.name}}</span></div> 
+      <hr class="fw-bold">
+      <div class="fst-italic fw-bold fs-6">Description:  <span class="" name="description" id="description">{{destination.description}}</span></div>
+      <div class="mt-2 ps-4"><i class="far fa-calendar-plus"></i> Departure date : <span class="" name="s_travel" id="s_travel">{{departure}}</span></div>
+      <div class="ps-4"><i class="far fa-calendar-times"></i> Return date : <span class="" name="e_travel" id="e_travel">{{arrive}}</span></div>
+    </div>
+    <div class="row mx-1 my-1" id="view_trip">
+      <h5 class="text-justify mt-4 mb-2 fw-bold text-capitalize"><i class="fas fa-users"></i>  Other Users Joining the Trip </h5>
+      <hr>
+      {% for user in destination.users.all%}
+        <p class="mt-2 ps-4"><i class="fas fa-user-plus text-success"></i> {{user.name}}</p>
+      {% empty %}
+        <p class="fw-bold ps-4"><i class="fas fa-exclamation-triangle text-danger"></i> Nobody joined this trip <i class="fas fa-exclamation-triangle text-danger"></i></p>
+      {% endfor %}
+  </div>
+{% endblock %}

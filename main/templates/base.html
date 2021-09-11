@@ -29,49 +29,20 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Travel Buddy</a>
+        <a class="navbar-brand fs-2" href="#">Travel Buddy</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-           
+          <div class="d-flex ms-auto">
             <div class="me-2 mt-3">
-              <a type="button" class=" btn btn-warning text-dark fs-5 py-0 px-3  float-end"  {% block btn %}href="/">Back {% endblock %}</a>
+              <a type="button" class=" btn btn-warning text-dark fs-5 py-0 px-3  float-end"  {% block btn %}href="/travels">Back {% endblock %}</a>
             </div>
-           
             <div class="col ms-3">
-              <span class="text-light fs-4"> Welcome {{user.name}}!</span>
-              <span class="logout "><br><a type="button" class="text-warning ms-auto float-end pe-2 fs-5"
-                  href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></span>
-            </div>
-           
+              <span class="text-light fs-4 ms-auto"> Welcome {{request.session.user.name}}!</span>
+              <span class="logout "><br><a type="button" class="text-warning ms-auto float-end pe-2 fs-5" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></span>
+            </div>           
           </div>
         </div>
       </div>
@@ -99,7 +70,7 @@
 
       {% if messages %}
       {% for message in messages %}
-      toastr.{ { message.tags } } ("{{ message }}")
+      toastr.{{message.tags}}("{{message}}")
       {% endfor %}
       {% endif %}
 

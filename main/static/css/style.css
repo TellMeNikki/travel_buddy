@@ -16,6 +16,11 @@ body{
   
 }
 
+#block_view{
+  margin: 0 auto;
+  margin-top: 7% !important;
+}
+
 #formulario{
   margin: 0.5rem;
   padding-top: 1.5rem;
@@ -47,6 +52,6 @@ label{
 
 #tabla{
   margin: 0.5rem;
-  padding-top: 1.5rem;
+  padding-top: 0.7rem;
   
 }

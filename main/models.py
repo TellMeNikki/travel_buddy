@@ -25,7 +25,7 @@ class UserManager(models.Manager):
 class TravelManager(models.Manager):
   def validador_basico(self, postData): 
     errors={}
-    if len(postData['destination']) < 1:
+    if len(postData['destination']) < 2:
       errors['destination'] = "destination can't be in blank"
     if len(postData['description']) < 4:
       errors['description'] = "tell us what are your plans?"

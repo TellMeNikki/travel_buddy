@@ -28,7 +28,7 @@ def login(request):
 
                 request.session['user'] = user
                 messages.success(request, "Logueado correctamente.")
-                return redirect("/")
+                return redirect("/travels")
             else:
                 messages.error(request, "Password o Email  incorrectos.")
         else:
@@ -74,7 +74,7 @@ def registro(request):
                 "name": f"{usuario_nuevo.name}",
                 "email": usuario_nuevo.email
             }
-            return redirect("/")
+            return redirect("/travels")
 
         return redirect("/registro")
     else:

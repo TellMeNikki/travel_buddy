@@ -10,11 +10,11 @@
 {% block btn %}href="/addtrip">Add Trip {% endblock %}
 
 {% block content%}
-<div class="container-fluid mt-3"  id="cont_index">
-  <!-- Tabla-->
-  <h5 class="fw-bold mt-2">Your Trip Schedule</h5>
+<div class="container-fluid mt-5"  id="cont_index">
+  <!-- Tabla mis viajes-->
+  <h5 class="fw-bold pt-3 ps-2">Your Trip Schedule</h5>
   <div class="table-responsive" id="tabla">
-    <table class="table table-striped text-dark py-2 px-2 text-justify">
+    <table class="table table-striped text-dark py-1 px-2 text-justify">
       <thead>
         <tr class="fw-bolder">
           <th scope="col">Destination</th>
@@ -28,7 +28,7 @@
         {% for travel in travels %}
         <tr>
           <th scope="row">
-            <a href="/travels/destination/{{travel.id}}" class="text-decoration-none">{{travel.destination}}</a>
+            <a href="view/{{travel.id}}" class="text-decoration-none text-dark"><i class="fas fa-map-marker-alt"></i> {{travel.destination}}</a>
           </th>
           <td>{{travel.start_travel}}</td>
           <td>{{travel.end_travel}}</td>
@@ -37,11 +37,8 @@
             <form method="POST" action="eliminar/{{postre.id}}">
               {% csrf_token %}
               <div class="btn-group">
-                <a type="button" data-href="/" data-bs-toggle="modal" class="btn-default border bg-danger text-light"
-                  id="delete" data-bs-target="#delete_btn"><i class="fas fa-trash 9x"></i> Cancel</a>
-                <a type="button" data-href="/" data-bs-toggle="modal"
-                  class="btn-default border bg-danger text-light" id="delete" data-bs-target="#delete_btn"><i
-                    class="fas fa-trash 9x"></i> Delete</a>
+                <a type="button" href="cancel/{{travel.id}}" class="btn border bg-warning text-light"id="cancel_btn" name="cancel_btn"><i class="fas fa-user-minus 2x"></i> Cancel</a>
+                <a type="button" href="delete/{{travel.id}}" class="btn border bg-danger text-light ms-2" id="delete_btn" name="delete_btn"><i class="fas fa-trash"></i> Delete</a>
               </div>
             </form>
           </td>
@@ -54,8 +51,8 @@
   </div>
 </div>
 <div class="container-fluid mt-3" id="cont_index">
-  <!-- Tabla-->
-  <h5 class="fw-bold mt-2">Other User's plans</h5>
+  <!-- Tabla otros viajes-->
+  <h5 class="fw-bold pt-3 ps-2">Other User's plans</h5>
   <div class="table-responsive" id="tabla">
     <table class="table table-striped text-dark py-2 px-2 text-justify">
       <thead>
@@ -70,18 +67,14 @@
         {% for travel in other_travels %}
         <tr>
           <th scope="row">
-            <a href="/travels/destination/{{travel.id}}" class="text-decoration-none">{{travel.destination}}</a>
+            <a href="view/{{travel.id}}" class="text-decoration-none text-dark"><i class="fas fa-map-marker-alt"></i> {{travel.destination}}</a>
           </th>
           <td>{{travel.start_travel}}</td>
           <td>{{travel.end_travel}}</td>
           <td>
-            <form method="POST" action="eliminar/{{postre.id}}">
-              {% csrf_token %}
-              <div class="btn-group">
-                <a type="button" data-href="/" data-bs-toggle="modal" class="btn-default border bg-danger text-light"
-                  id="delete" data-bs-target="#delete_btn"> Join</a>
+            <div class="btn-group">
+                <a type="button" href="join/{{travel.id}}" class="btn btn-success border text-light" id="join_btn" name="join_btn"><i class="fas fa-user-plus 1x"></i> Join</a>
               </div>
-            </form>
           </td>
         </tr>
         {% empty %}
